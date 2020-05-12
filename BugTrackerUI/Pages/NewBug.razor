@@ -1,29 +1,40 @@
 ﻿@page "/new-bug"
+@inherits NewBugBase
+@using Helpers;
 
 <h3>Add New Bug</h3>
 
-<EditForm Model="AddBug" OnValidSubmit="HandleValidSubmit">
-    <DataAnnotationsValidator/>
-    <ValidationSummary/>
-    <InputText @bind-Value="@AddBug.Title" placeholder="Enter Title"/>
-    <InputText @bind-Value="@AddBug.Description" placeholder="Enter Description"/>
-    <InputNumber @bind-Value="@AddBug.Priority" placeholder="Enter Priority"/>
-    <button type="submit">Add Bug</button>
-</EditForm>
+<div class="container">
+    <EditForm Model="AddBug" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+        <div class="d-flex flex-column">
+            <div class="d-flex">
+                <label class="p-2 align-content-center">Title:</label>
+                <input class="form-text form-control p-2 flex-grow-1" type="text" @bind-value="@AddBug.Title" placeholder="Enter Title">
+            </div>
+        </div>
+        <div class="d-flex flex-column">
+            <div class="d-flex">
+                <label class="p-2 align-content-center" >Priority:</label>
+                <select @bind="@AddBug.Priority" class="form-text form-control p-2 flex-grow-1">
+                    @foreach (var value in Enum.GetValues(typeof(Priority)).OfType<Priority>())
+                    {
+                        <option value="@value">@DescriptionHelper.GetDescriptionAttributeOrToString(value)</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="d-flex flex-column">
+            <div class="input-group d-flex">
+                <textarea class="form-text form-control p-2" rows="5" @bind="@AddBug.Description" placeholder="Enter Description">
+                </textarea>
+            </div>
+        </div>
+        <div class="d-flex flex-column justify-content-end mb-4">
+            <button type="submit" class="p-2 align-content-end">Add Bug</button>
+        </div>
 
-@code {
+    </EditForm>
+</div>
 
-    public Bug AddBug { get; set; } = new Bug();
-
-    [Inject]
-    public IBugService BugService { get; set; } = null!; // these should never be null so we want an exception if they are
-
-    [Inject]
-    public NavigationManager NavService { get; set; } = null!;
-
-    protected void HandleValidSubmit()
-    {
-        BugService?.AddBug(AddBug);
-        NavService?.NavigateTo("");
-    }
-}

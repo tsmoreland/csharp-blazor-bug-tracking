@@ -15,7 +15,6 @@ namespace BugTrackerUI
         public string Description { get; set; } = string.Empty;
 
         [Required]
-        [Range(1, 5)]
-        public int Priority { get; set; } = -1;
+        public Priority Priority { get; set; } = Priority.Low;
     }
 }
