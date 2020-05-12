@@ -1,14 +1,11 @@
-﻿using BugTrackerUI;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BugTrackerUI.Services
 {
     public class BugService : IBugService
     {
-        private List<Bug> Bugs = new List<Bug>();
+        private List<Bug> Bugs { get; } = new List<Bug>();
 
         public void AddBug(Bug newBug)
         {
@@ -16,9 +13,14 @@ namespace BugTrackerUI.Services
             Bugs.Add(newBug);
         }
 
-        public List<Bug> GetBugs()
+        public void RemoveBug(int id)
         {
-            return Bugs;
+            var match = Bugs.FirstOrDefault(bug => bug.Id == id);
+            if (match != null)
+                Bugs.Remove(match);
         }
+
+        public IEnumerable<Bug> GetBugs() => Bugs.AsEnumerable();
+
     }
 }

@@ -16,14 +16,14 @@
     public Bug AddBug { get; set; } = new Bug();
 
     [Inject]
-    public IBugService BugService { get; set; }
+    public IBugService BugService { get; set; } = null!; // these should never be null so we want an exception if they are
 
     [Inject]
-    public NavigationManager NavService { get; set; }
+    public NavigationManager NavService { get; set; } = null!;
 
     protected void HandleValidSubmit()
     {
-        BugService.AddBug(AddBug);
-        NavService.NavigateTo("");
+        BugService?.AddBug(AddBug);
+        NavService?.NavigateTo("");
     }
 }

@@ -21,10 +21,10 @@
 </table>
 
 @code {
-    public List<Bug> Bugs { get; set; }
+    public List<Bug> Bugs { get; set; } = new List<Bug>();
 
     [Inject]
-    public IBugService BugService { get; set; }
+    public IBugService BugService { get; set; } = null!;
 
     protected override void OnInitialized()
     {
