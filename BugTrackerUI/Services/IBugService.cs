@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BugTrackerUI.Model;
+using System.Collections.Generic;
 
 namespace BugTrackerUI
 {

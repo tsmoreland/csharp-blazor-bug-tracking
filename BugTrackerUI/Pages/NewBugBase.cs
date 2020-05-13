@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BugTrackerUI.Model;
+using Microsoft.AspNetCore.Components;
 
 namespace BugTrackerUI.Pages
 {

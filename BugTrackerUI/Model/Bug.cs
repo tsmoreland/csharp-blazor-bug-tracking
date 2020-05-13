@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BugTrackerUI
+namespace BugTrackerUI.Model
 {
     public class Bug
     {
